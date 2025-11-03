@@ -19,7 +19,8 @@ namespace SistemaReservasLaboratorio.Views.Mostreo_Reportes
 
         private void btn_crearTXT_Click(object sender, EventArgs e)
         {
-            // invocar mostreoArchivoTXT
+
+            void ExportarDataGridViewATexto()// invocar mostreoArchivoTXT
         }
     }
 }
