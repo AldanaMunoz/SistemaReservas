@@ -201,12 +201,12 @@ namespace SistemaReservasLaboratorio.Views
 
         private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
-
+            // borrar luego
         }
 
         private void FormPrincipal_Load(object sender, EventArgs e)
         {
-
+            // borrar luego
         }
     }
 }

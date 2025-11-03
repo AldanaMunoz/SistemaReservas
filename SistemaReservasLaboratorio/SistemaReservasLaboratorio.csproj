@@ -99,6 +99,14 @@
     <Compile Include="Views\Laboratorios\FormModificarLaboratorio.Designer.cs">
       <DependentUpon>FormModificarLaboratorio.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\Mostreo Reportes\FormRegistros.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Mostreo Reportes\FormRegistros.Designer.cs">
+      <DependentUpon>FormRegistros.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Mostreo Reportes\MostreoArchivoTXT.cs" />
+    <Compile Include="Views\Mostreo Reportes\PantallaMostreo.cs" />
     <Compile Include="Views\Reservas\FormAltaReserva.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -143,6 +151,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Laboratorios\FormConsultaLaboratorio.resx">
       <DependentUpon>FormConsultaLaboratorio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Mostreo Reportes\FormRegistros.resx">
+      <DependentUpon>FormRegistros.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Reservas\FormAltaReserva.resx">
       <DependentUpon>FormAltaReserva.cs</DependentUpon>
