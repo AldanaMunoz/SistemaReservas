@@ -26,7 +26,7 @@ namespace SistemaReservasLaboratorio.Views
                 Email: aldanabelen.munoz@alumnos.uai.edu.ar
 
                 Apellido y Nombre: Turri, Franco
-                Email: @alumnos.uai.edu.ar
+                Email: franco.turri@alumnos.uai.edu.ar
 
                 ---
                 Proyecto: Sistema de Reservas de Laboratorio
