@@ -11,7 +11,7 @@ using System.IO;
 
 namespace SistemaReservasLaboratorio.Views.Mostreo_Reportes
 {
-    internal class MostreoArchivoTXT // Metodo deberia de mostrar toda la info en un texto .txt
+    internal class MostreoArchivoTXTejemploNoUsar // Metodo deberia de mostrar toda la info en un texto .txt
     {
         /*private void cargardatosejemplo()
         {

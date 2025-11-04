@@ -40,7 +40,7 @@
             // 
             // btn_crearTXT
             // 
-            this.btn_crearTXT.Location = new System.Drawing.Point(722, 300);
+            this.btn_crearTXT.Location = new System.Drawing.Point(734, 68);
             this.btn_crearTXT.Name = "btn_crearTXT";
             this.btn_crearTXT.Size = new System.Drawing.Size(125, 45);
             this.btn_crearTXT.TabIndex = 0;
