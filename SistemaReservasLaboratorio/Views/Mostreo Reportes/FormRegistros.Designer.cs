@@ -56,6 +56,7 @@
             this.btn_salir.TabIndex = 1;
             this.btn_salir.Text = "Cerrar";
             this.btn_salir.UseVisualStyleBackColor = true;
+            this.btn_salir.Click += new System.EventHandler(this.btn_salir_Click);
             // 
             // dgv_registroreserva
             // 

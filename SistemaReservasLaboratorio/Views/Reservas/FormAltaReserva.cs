@@ -17,12 +17,56 @@ namespace SistemaReservasLaboratorio.Views.Reservas
     {
         private ControladorReserva controladorReserva;
         private ControladorLaboratorio controladorLaboratorio;
+        private int editingReservaId = 0; // 0 = nuevo
+
         public FormAltaReserva()
         {
             InitializeComponent();
             controladorReserva = new ControladorReserva();
             controladorLaboratorio = new ControladorLaboratorio();
             CargarLaboratorios();
+        }
+
+        public void SetReserva(Reserva reserva)
+        {
+            if (reserva == null) return;
+
+            editingReservaId = reserva.IdReserva;
+
+            // Asegurar laboratorios cargados
+            CargarLaboratorios();
+
+            cboLaboratorio.SelectedValue = reserva.IdLaboratorio;
+            txtCarrera.Text = reserva.Carrera;
+            txtAsignatura.Text = reserva.Asignatura;
+            nudAnio.Value = reserva.Anio > 0 ? reserva.Anio : 1;
+            txtComision.Text = reserva.Comision;
+            txtProfesor.Text = reserva.Profesor;
+
+            if (reserva is ReservaCuatrimestral cuatri)
+            {
+                rdbCuatrimestral.Checked = true;
+                grpCuatrimestral.Enabled = true;
+                grpEventual.Enabled = false;
+
+                dtpFechaInicioCuatri.Value = cuatri.FechaHoraInicio;
+                dtpHoraInicioCuatri.Value = cuatri.FechaHoraInicio;
+                dtpFechaFinCuatri.Value = cuatri.FechaHoraFin;
+                dtpHoraFinCuatri.Value = cuatri.FechaHoraFin;
+
+                rdbSemanal.Checked = cuatri.Periodicidad == ReservaCuatrimestral.TipoPeriodicidad.Semanal;
+                rdbQuincenal.Checked = cuatri.Periodicidad == ReservaCuatrimestral.TipoPeriodicidad.Quincenal;
+            }
+            else if (reserva is ReservaEventual eventual)
+            {
+                rdbEventual.Checked = true;
+                grpCuatrimestral.Enabled = false;
+                grpEventual.Enabled = true;
+
+                dtpFechaInicioEventual.Value = eventual.FechaHoraInicio;
+                dtpHoraInicioEventual.Value = eventual.FechaHoraInicio;
+                nudSemanas.Value = eventual.CantidadSemanas;
+            }
         }
 
         private void CargarLaboratorios()
@@ -58,6 +102,51 @@ namespace SistemaReservasLaboratorio.Views.Reservas
                 if (!ValidarCampos())
                     return;
 
+                if (editingReservaId > 0)
+                {
+                    // Editing existing reservation
+                    if (rdbCuatrimestral.Checked)
+                    {
+                        DateTime inicio = dtpFechaInicioCuatri.Value.Date + dtpHoraInicioCuatri.Value.TimeOfDay;
+                        DateTime fin = dtpFechaFinCuatri.Value.Date + dtpHoraFinCuatri.Value.TimeOfDay;
+
+                        ReservaCuatrimestral.TipoPeriodicidad periodicidad =
+                            rdbSemanal.Checked ? ReservaCuatrimestral.TipoPeriodicidad.Semanal
+                                               : ReservaCuatrimestral.TipoPeriodicidad.Quincenal;
+
+                        var reserva = new ReservaCuatrimestral(inicio, fin, periodicidad,
+                            txtCarrera.Text.Trim(), txtAsignatura.Text.Trim(), (int)nudAnio.Value,
+                            txtComision.Text.Trim(), txtProfesor.Text.Trim(), (int)cboLaboratorio.SelectedValue)
+                        {
+                            IdReserva = editingReservaId
+                        };
+
+                        controladorReserva.ModificarReserva(reserva);
+                    }
+                    else
+                    {
+                        DateTime fechaInicio = dtpFechaInicioEventual.Value.Date + dtpHoraInicioEventual.Value.TimeOfDay;
+                        int cantidadSemanas = (int)nudSemanas.Value;
+
+                        var reserva = new ReservaEventual(fechaInicio, cantidadSemanas,
+                            txtCarrera.Text.Trim(), txtAsignatura.Text.Trim(), (int)nudAnio.Value,
+                            txtComision.Text.Trim(), txtProfesor.Text.Trim(), (int)cboLaboratorio.SelectedValue)
+                        {
+                            IdReserva = editingReservaId
+                        };
+
+                        controladorReserva.ModificarReserva(reserva);
+                    }
+
+                    MessageBox.Show("Reserva modificada exitosamente", "Éxito",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    this.DialogResult = DialogResult.OK;
+                    this.Close();
+                    return;
+                }
+
+                // New reservation
                 if (rdbCuatrimestral.Checked)
                 {
                     GuardarReservaCuatrimestral();
@@ -194,6 +283,7 @@ namespace SistemaReservasLaboratorio.Views.Reservas
             dtpFechaInicioCuatri.Value = DateTime.Now;
             dtpFechaFinCuatri.Value = DateTime.Now.AddMonths(4);
             dtpFechaInicioEventual.Value = DateTime.Now;
+            editingReservaId = 0;
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
@@ -212,6 +302,11 @@ namespace SistemaReservasLaboratorio.Views.Reservas
         }
 
         private void numericUpDown1_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void FormAltaReserva_Load(object sender, EventArgs e)
         {
 
         }

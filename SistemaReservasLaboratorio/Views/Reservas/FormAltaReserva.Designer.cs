@@ -214,6 +214,7 @@
             this.rdbCuatrimestral.TabStop = true;
             this.rdbCuatrimestral.Text = "Cuatrimestral";
             this.rdbCuatrimestral.UseVisualStyleBackColor = true;
+            this.rdbCuatrimestral.CheckedChanged += new System.EventHandler(this.rdbCuatrimestral_CheckedChanged);
             // 
             // rdbEventual
             // 
@@ -224,6 +225,7 @@
             this.rdbEventual.TabIndex = 14;
             this.rdbEventual.Text = "Eventual";
             this.rdbEventual.UseVisualStyleBackColor = true;
+            this.rdbEventual.CheckedChanged += new System.EventHandler(this.rdbEventual_CheckedChanged);
             // 
             // frpTipoReserva
             // 
@@ -414,6 +416,7 @@
             this.btnGuardar.TabIndex = 27;
             this.btnGuardar.Text = "Guardar";
             this.btnGuardar.UseVisualStyleBackColor = true;
+            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
             // btnCancelar
             // 
@@ -423,6 +426,7 @@
             this.btnCancelar.TabIndex = 28;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
             // FormAltaReserva
             // 
@@ -437,6 +441,7 @@
             this.Controls.Add(this.grpDatosComunes);
             this.Name = "FormAltaReserva";
             this.Text = "FormAltaReserva";
+            this.Load += new System.EventHandler(this.FormAltaReserva_Load);
             ((System.ComponentModel.ISupportInitialize)(this.nudAnio)).EndInit();
             this.grpDatosComunes.ResumeLayout(false);
             this.grpDatosComunes.PerformLayout();

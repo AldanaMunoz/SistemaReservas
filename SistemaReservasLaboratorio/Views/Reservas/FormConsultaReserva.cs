@@ -14,11 +14,14 @@ namespace SistemaReservasLaboratorio.Views.Reservas
     public partial class FormConsultaReserva : Form
     {
         private ControladorReserva controlador;
+        private BindingSource reservasBinding = new BindingSource();
+
         public FormConsultaReserva()
         {
             InitializeComponent();
             controlador = new ControladorReserva();
             ConfigurarDataGridView();
+            dgvReservas.DataSource = reservasBinding;
         }
         private void ConfigurarDataGridView()
         {
@@ -78,8 +81,11 @@ namespace SistemaReservasLaboratorio.Views.Reservas
         {
             try
             {
-                var reservas = controlador.ObtenerTodasLasReservas();
-                dgvReservas.DataSource = reservas;
+                // recreate controller to force repository reload from DB
+                controlador = new ControladorReserva();
+                var reservas = controlador.ObtenerTodasLasReservas() ?? new List<Models.Reserva>();
+                reservasBinding.DataSource = reservas;
+                dgvReservas.Refresh();
                 lblResultados.Text = $"Total: {reservas.Count} reservas";
             }
             catch (Exception ex)
@@ -92,8 +98,11 @@ namespace SistemaReservasLaboratorio.Views.Reservas
         {
             try
             {
+                // refresh controller to ensure latest data
+                controlador = new ControladorReserva();
                 var reservas = controlador.BuscarReservasPorFecha(dtpFechaBusqueda.Value);
-                dgvReservas.DataSource = reservas;
+                reservasBinding.DataSource = reservas;
+                dgvReservas.Refresh();
                 lblResultados.Text = $"Encontradas: {reservas.Count} reservas";
             }
             catch (Exception ex)
@@ -113,8 +122,10 @@ namespace SistemaReservasLaboratorio.Views.Reservas
                     return;
                 }
 
+                controlador = new ControladorReserva();
                 var reservas = controlador.BuscarReservasPorProfesor(txtProfesorBusqueda.Text);
-                dgvReservas.DataSource = reservas;
+                reservasBinding.DataSource = reservas;
+                dgvReservas.Refresh();
                 lblResultados.Text = $"Encontradas: {reservas.Count} reservas";
             }
             catch (Exception ex)
@@ -134,8 +145,10 @@ namespace SistemaReservasLaboratorio.Views.Reservas
                     return;
                 }
 
+                controlador = new ControladorReserva();
                 var reservas = controlador.BuscarReservasPorAsignatura(txtAsignaturaBusqueda.Text);
-                dgvReservas.DataSource = reservas;
+                reservasBinding.DataSource = reservas;
+                dgvReservas.Refresh();
                 lblResultados.Text = $"Encontradas: {reservas.Count} reservas";
             }
             catch (Exception ex)

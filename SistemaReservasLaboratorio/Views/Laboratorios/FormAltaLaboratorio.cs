@@ -9,17 +9,30 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using SistemaReservasLaboratorio.Models;
 
 namespace SistemaReservasLaboratorio.Views.Laboratorios
 {
     public partial class FormAltaLaboratorio : Form
     {
         private ControladorLaboratorio controlador;
+        private int editingLaboratorioId = 0; // 0 = nuevo
+
         public FormAltaLaboratorio()
         {
             InitializeComponent();
             controlador = new ControladorLaboratorio();
         }
+
+        public void SetLaboratorio(Laboratorio lab)
+        {
+            if (lab == null) return;
+            editingLaboratorioId = lab.IdLaboratorio;
+            nudNumeroAsignado.Value = lab.NumeroAsignado;
+            txtUbicacionPiso.Text = lab.UbicacionPiso;
+            nudCapacidadPuestos.Value = lab.CapacidadPuestos;
+        }
+
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             try
@@ -31,12 +44,22 @@ namespace SistemaReservasLaboratorio.Views.Laboratorios
                 string ubicacionPiso = txtUbicacionPiso.Text.Trim();
                 int capacidadPuestos = (int)nudCapacidadPuestos.Value;
 
-                controlador.AgregarLaboratorio(numeroAsignado, ubicacionPiso, capacidadPuestos);
+                if (editingLaboratorioId > 0)
+                {
+                    controlador.ModificarLaboratorio(editingLaboratorioId, numeroAsignado, ubicacionPiso, capacidadPuestos);
+                    MessageBox.Show("Laboratorio modificado exitosamente", "Éxito",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    controlador.AgregarLaboratorio(numeroAsignado, ubicacionPiso, capacidadPuestos);
+                    MessageBox.Show("Laboratorio guardado exitosamente", "Éxito",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
 
-                MessageBox.Show("Laboratorio guardado exitosamente", "Éxito",
-                    MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                LimpiarCampos();
+                // Indicar al llamador que se guardó correctamente
+                this.DialogResult = DialogResult.OK;
+                this.Close();
             }
             catch (LaboratorioException ex)
             {
@@ -82,6 +105,7 @@ namespace SistemaReservasLaboratorio.Views.Laboratorios
             nudNumeroAsignado.Value = 1;
             txtUbicacionPiso.Clear();
             nudCapacidadPuestos.Value = 1;
+            editingLaboratorioId = 0;
         }
         private void btnCancelar_Click(object sender, EventArgs e)
         {

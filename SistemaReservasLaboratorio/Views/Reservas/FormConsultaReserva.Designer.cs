@@ -54,6 +54,7 @@
             this.btnBuscarTodas.TabIndex = 0;
             this.btnBuscarTodas.Text = "Ver Todas";
             this.btnBuscarTodas.UseVisualStyleBackColor = true;
+            this.btnBuscarTodas.Click += new System.EventHandler(this.btnBuscarTodas_Click);
             // 
             // label1
             // 
@@ -79,6 +80,7 @@
             this.btnBuscarPorFecha.TabIndex = 3;
             this.btnBuscarPorFecha.Text = "Buscar";
             this.btnBuscarPorFecha.UseVisualStyleBackColor = true;
+            this.btnBuscarPorFecha.Click += new System.EventHandler(this.btnBuscarPorFecha_Click);
             // 
             // btnBuscarPorProfesor
             // 
@@ -88,6 +90,7 @@
             this.btnBuscarPorProfesor.TabIndex = 6;
             this.btnBuscarPorProfesor.Text = "Buscar";
             this.btnBuscarPorProfesor.UseVisualStyleBackColor = true;
+            this.btnBuscarPorProfesor.Click += new System.EventHandler(this.btnBuscarPorProfesor_Click);
             // 
             // label2
             // 
@@ -120,6 +123,7 @@
             this.btnBuscarPorAsignatura.TabIndex = 9;
             this.btnBuscarPorAsignatura.Text = "Buscar";
             this.btnBuscarPorAsignatura.UseVisualStyleBackColor = true;
+            this.btnBuscarPorAsignatura.Click += new System.EventHandler(this.btnBuscarPorAsignatura_Click);
             // 
             // label3
             // 
@@ -176,6 +180,7 @@
             this.btnCerrar.TabIndex = 11;
             this.btnCerrar.Text = "Cerrar";
             this.btnCerrar.UseVisualStyleBackColor = true;
+            this.btnCerrar.Click += new System.EventHandler(this.btnCerrar_Click);
             // 
             // FormConsultaReserva
             // 

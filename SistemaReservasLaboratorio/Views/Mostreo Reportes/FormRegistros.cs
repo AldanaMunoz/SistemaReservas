@@ -58,8 +58,7 @@ namespace SistemaReservasLaboratorio.Views.Mostreo_Reportes
 
         private void btn_crearTXT_Click(object sender, EventArgs e)
         {
-           FormRegistros formulario = new FormRegistros();
-            // Configurar el cuadro de diálogo para guardar archivo
+            // Usar los DataGridView del formulario actual
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             SaveFileDialog saveFileDialog2 = new SaveFileDialog();
             saveFileDialog.Filter = "Archivos de texto (*.txt)|*.txt|Todos los archivos (*.*)|*.*";
@@ -73,10 +72,10 @@ namespace SistemaReservasLaboratorio.Views.Mostreo_Reportes
             {
                 try
                 {
-                    ExportarDataGridViewATexto(formulario.dgv_registroreserva, saveFileDialog.FileName);
+                    ExportarDataGridViewATexto(this.dgv_registroreserva, saveFileDialog.FileName);
                     MessageBox.Show("Datos exportados exitosamente a:\n" + saveFileDialog.FileName,
                                     "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    ExportarDataGridViewATexto(formulario.dgv_registrolaboratorio, saveFileDialog2.FileName);
+                    ExportarDataGridViewATexto(this.dgv_registrolaboratorio, saveFileDialog2.FileName);
                     MessageBox.Show("Datos exportados exitosamente a:\n" + saveFileDialog2.FileName,
                                     "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
@@ -86,6 +85,11 @@ namespace SistemaReservasLaboratorio.Views.Mostreo_Reportes
                                     "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }// invocar mostreoArchivoTXT
+        }
+
+        private void btn_salir_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

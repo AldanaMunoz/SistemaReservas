@@ -1,5 +1,6 @@
 ﻿using SistemaReservasLaboratorio.Views.Laboratorios;
 using SistemaReservasLaboratorio.Views.Reservas;
+using SistemaReservasLaboratorio.Views.Mostreo_Reportes;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -28,164 +29,75 @@ namespace SistemaReservasLaboratorio.Views
 
         private void altaReservaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            try
-            {
-                FormAltaReserva formAlta = new FormAltaReserva();
-                formAlta.ShowDialog();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error al abrir formulario: {ex.Message}",
-                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            FormAltaReserva formAlta = new FormAltaReserva();
+            formAlta.ShowDialog();
         }
         private void modificacionReservaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            try
-            {
-                FormModificarReserva formModificar = new FormModificarReserva();
-                formModificar.ShowDialog();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error al abrir formulario: {ex.Message}",
-                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            FormModificarReserva formModificar = new FormModificarReserva();
+            formModificar.ShowDialog();
         }
 
         private void bajaReservaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            try
-            {
-                FormBajaReserva formBaja = new FormBajaReserva();
-                formBaja.ShowDialog();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error al abrir formulario: {ex.Message}",
-                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            FormBajaReserva formBaja = new FormBajaReserva();
+            formBaja.ShowDialog();
         }
 
         private void consultaReservasToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            try
-            {
-                FormConsultaReserva formConsulta = new FormConsultaReserva();
-                formConsulta.ShowDialog();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error al abrir formulario: {ex.Message}",
-                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            FormConsultaReserva formConsulta = new FormConsultaReserva();
+            formConsulta.ShowDialog();
         }
-
-
         //Gestión de Laboratorios
         private void altaLaboratorioToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            try
-            {
-                FormAltaLaboratorio formAlta = new FormAltaLaboratorio();
-                formAlta.ShowDialog();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error al abrir formulario: {ex.Message}",
-                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            FormAltaLaboratorio formAlta = new FormAltaLaboratorio();
+            formAlta.ShowDialog();
         }
 
         private void modificacionLaboratorioToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            try
-            {
-                FormModificarLaboratorio formModificar = new FormModificarLaboratorio();
-                formModificar.ShowDialog();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error al abrir formulario: {ex.Message}",
-                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            FormModificarLaboratorio formModificar = new FormModificarLaboratorio();
+            formModificar.ShowDialog();
         }
 
         private void bajaLaboratorioToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            try
-            {
-                FormBajaLaboratorio formBaja = new FormBajaLaboratorio();
-                formBaja.ShowDialog();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error al abrir formulario: {ex.Message}",
-                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            FormBajaLaboratorio formBaja = new FormBajaLaboratorio();
+            formBaja.ShowDialog();
         }
 
         private void consultaLaboratoriosToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            try
-            {
-                FormConsultaLaboratorio formConsulta = new FormConsultaLaboratorio();
-                formConsulta.ShowDialog();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error al abrir formulario: {ex.Message}",
-                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            FormConsultaLaboratorio formConsulta = new FormConsultaLaboratorio();
+            formConsulta.ShowDialog();
         }
         private void generacionReportesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(
-                "Módulo de reportes en desarrollo.\n\n" +
-                "Próximamente se implementarán diversos reportes:\n" +
-                "- Reporte de reservas por período\n" +
-                "- Estadísticas de uso de laboratorios\n" +
-                "- Reportes por profesor/asignatura",
-                "Información",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information);
-        }
-        private void integrantesToolStripMenuItem_Click(object sender, EventArgs e)
-        {
             try
             {
-                FormIntegrantes formIntegrantes = new FormIntegrantes();
-                formIntegrantes.ShowDialog();
+                // Abrir pantalla de mostreo de reportes
+                PantallaMostreo pantalla = new PantallaMostreo();
+                // Cargar datos en el formulario interno
+                pantalla.CargarLaboratorios();
+                pantalla.CargarReservas();
+                pantalla.formulario.Text = "Mostreo de Reportes";
+                pantalla.formulario.ShowDialog();
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error al abrir formulario: {ex.Message}",
-                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Error al abrir módulo de reportes: {ex.Message}", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+        private void integrantesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Views.FormIntegrantes formIntegrantes = new Views.FormIntegrantes();
+            formIntegrantes.ShowDialog();
         }
 
         private void salirToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            SalirAplicacion();
-        }
-
-        private void FormPrincipal_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            if (e.CloseReason == CloseReason.UserClosing)
-            {
-                DialogResult resultado = MessageBox.Show(
-                    "¿Está seguro que desea salir de la aplicación?",
-                    "Confirmar salida",
-                    MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Question);
-
-                if (resultado == DialogResult.No)
-                {
-                    e.Cancel = true;
-                }
-            }
-        }
-        private void SalirAplicacion()
         {
             DialogResult resultado = MessageBox.Show(
                 "¿Está seguro que desea salir de la aplicación?",
@@ -201,12 +113,12 @@ namespace SistemaReservasLaboratorio.Views
 
         private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
-            // borrar luego
+
         }
 
         private void FormPrincipal_Load(object sender, EventArgs e)
         {
-            // borrar luego
+
         }
     }
 }
